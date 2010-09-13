@@ -1,8 +1,10 @@
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
-
 require 'dm-migrations'
+require 'hpricot'
+require 'rest-open-uri'
+
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
 
