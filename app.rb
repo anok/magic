@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 
+require 'dm-migrations'
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
 
 class Shop
@@ -38,6 +40,7 @@ end
 
 DataMapper.finalize
 
+DataMapper.auto_migrate!
 get '/' do
   "MAGIC!"
 end
