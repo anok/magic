@@ -49,8 +49,14 @@ get '/' do
   "MAGIC!"
 end
 
-get '/add/:list' do
-  
+get '/add/:list/:id' do
+  list = List.first_or_create(:name => params[:list])
+  id = params[:id]
+  hdrs = {"User-Agent"=>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; 
+en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1", 
+"Accept-Charset"=>"utf-8", "Accept"=>"text/html"}
+  table = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + 
+params[:id], hdrs)).search("table[@class=price_list]")
 end
 
 get '/see/:list' do
