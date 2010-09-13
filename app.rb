@@ -35,12 +35,26 @@ class ToBuyCard
   include DataMapper::Resource
   belongs_to :list
   property :id, Serial
+  property :quantity, Integer
   property :name, String, :key => true
 end
 
 DataMapper.finalize
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
+
 get '/' do
   "MAGIC!"
+end
+
+get '/add/:list' do
+  
+end
+
+get '/see/:list' do
+
+end
+
+get '/all' do
+
 end
