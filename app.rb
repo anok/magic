@@ -145,7 +145,7 @@ end
 get '/batchadd/:list' do
   list = List.first_or_create(:name => params[:list])
   r='Adicione um par de "quantidade, id de carta", por linha.<br>'
-  r+="<form action='/batchadd/#{params[:list]}' method='POST'><textarea name=\'cards\'></textarea>"
+  r+="<form action='/batchadd/#{params[:list]}' method='POST'><textarea name=\'cards\'></textarea><input type='submit' value='ctzzz'/></form>"
   r
 end
 
