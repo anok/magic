@@ -38,7 +38,6 @@ class Tobuycard
   include DataMapper::Resource
   belongs_to :list
   property :id, Serial
-  property :idshop, Interger
   property :quantity, Integer
   property :name, String, :key => true
 end
@@ -85,7 +84,6 @@ get '/add/:list/:quant/:id' do
   end
   tobuycard = list.tobuycards.first_or_create(:name => nome)
   tobuycard.quantity = quant
-  tobuycard.idshop = id
   tobuycard.save
   list.save
   "Card #{nome} adicionado a lista #{list.name}, #{quant} unidades. para ver a lista: <a href='/see/#{list.name}'>clique aqui</a>, ou continue adicionado coisasss ;3"
@@ -111,7 +109,7 @@ get '/see/:list' do
       tem = shop.stockcards.first(:name => card.name, :quantity.gte => card.quantity)
       if tem then
         cardtotal = card.quantity * tem.price
-        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition})<br>"
+        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition}) '<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>'<br>"
         soma += cardtotal
         cartas += card.quantity
       end

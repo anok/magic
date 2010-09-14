@@ -98,7 +98,7 @@ get '/see/:list' do
   somacards = 0
   tobuy.each do |card|
     somacards += card.quantity
-    r += card.name.to_s + ' * ' + card.quantity.to_s + '<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>'
+    r += card.name.to_s + ' * ' + card.quantity.to_s + "<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>"
   end
   r += "total: #{somacards.to_s} cartas<br><br>"
   list.shops.each do |shop|
@@ -109,7 +109,7 @@ get '/see/:list' do
       tem = shop.stockcards.first(:name => card.name, :quantity.gte => card.quantity)
       if tem then
         cardtotal = card.quantity * tem.price
-        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition})<br>"
+        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition}) '<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>'<br>"
         soma += cardtotal
         cartas += card.quantity
       end
