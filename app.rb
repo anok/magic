@@ -70,7 +70,7 @@ get '/add/:list/:quant/:id' do
   tobuycard.quantity = quant
   tobuycard.save
   list.save
-  "Card #{nome} adicionado a lista #{list.name}, #{quant} unidades. para ver a lista: <a href='/see/#{list.name}'>, ou continue adicionado coisasss ;3"
+  "Card #{nome} adicionado a lista #{list.name}, #{quant} unidades. para ver a lista: <a href='/see/#{list.name}'>clique aqui</a>, ou continue adicionado coisasss ;3"
 end
 
 get '/see/:list' do
