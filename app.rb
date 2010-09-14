@@ -154,9 +154,7 @@ post '/batchadd/:list' do
   cards = params[:cards].split()
   r = ''
   cards.each do |bla|
-    bla.split(', ').each do |quant, id|
-      r += '"'+ quant + '" "' + id + '"<br>'
-    end
+    r += "#{bla} <br>"
   end
   r +="para ver a lista: <a href='/see/#{list.name}'>clique aqui</a>."
   r
