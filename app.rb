@@ -124,7 +124,7 @@ get '/removecard/:list/:id' do
   list = List.first_or_create(:name => params[:list])
   tobuy = list.tobuycards.first(:id => params[:id])
   tobuy.delete!
-  redirect '/see/#{params[:list]'
+  redirect "/see/#{params[:list]}"
 end
 
 get '/updatecard/:list/:id/:n' do
@@ -132,7 +132,7 @@ get '/updatecard/:list/:id/:n' do
   tobuy = list.tobuycards.first(:id => params[:id])
   tobuy.quantity = params[:n]
   tobuy.save
-  redirect '/see/#{params[:list]'
+  redirect "/see/#{params[:list]}"
 end
 
 get '/remove/:list/' do
