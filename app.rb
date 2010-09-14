@@ -13,7 +13,7 @@ class Shop
   belongs_to :list
   property :id, Serial
   property :name, String, :key => true
-  has n, :StockCards
+  has n, :stockcards
 end
 
 class Stockcard
