@@ -48,7 +48,7 @@ DataMapper.auto_upgrade!
 
 get '/' do
   r = '<head><title>MAGIC</title><meta content=\'text/html; charset=utf-8\' http-equiv=\'Content-Type\' /></head><body>BEM VINDO AO MARAVILHOSO MUNDO DE MAGIC! AQUI VOCE TERÁ AMIGOS!<br>'
-  r += 'para criar uma lista basta apontar seu navegador para -> http://magic.heroku.com/add/<b>NOME</b>/<b>N</b>/<b>ID</b><br>'
+  r += '<br>Para criar uma lista basta apontar seu navegador para -> http://magic.heroku.com/add/<b>NOME</b>/<b>N</b>/<b>ID</b><br>'
   r += 'onde NOME é o nome da lista(como ela vai aparecer aqui na primeira página, e o que você terá que digitar pra buscar ela<br>'
   r += 'N é o numero de cards que você quer<br>'
   r += 'ID é o id dela no site <a href=\'http://store.tcgplayer.com/\' target=\'_blank\'>http://store.tcgplayer.com</a><br>'
@@ -76,7 +76,7 @@ get '/add/:list/:quant/:id' do
   table = doc.search("table[@class=price_list]").search("tr")
   table[1..-1].each do |x| x = x.search('td')
     shop = list.shops.first_or_create(:name => x[1].inner_html)
-    card = shop.stockcards.first_or_create(:name => nome)
+    card = shop.stockcards.first_or_create(:name => nome, :condition => x[2].inner_html)
     card.quantity = x[3].inner_html.to_i #quantidade
     card.price = x[4].inner_html[1..-1].to_f #preço
     card.save

@@ -76,7 +76,7 @@ get '/add/:list/:quant/:id' do
   table = doc.search("table[@class=price_list]").search("tr")
   table[1..-1].each do |x| x = x.search('td')
     shop = list.shops.first_or_create(:name => x[1].inner_html)
-    card = shop.stockcards.first_or_create(:name => nome)
+    card = shop.stockcards.first_or_create(:name => nome, :condition => x[2].inner_html)
     card.quantity = x[3].inner_html.to_i #quantidade
     card.price = x[4].inner_html[1..-1].to_f #preço
     card.save
@@ -100,7 +100,7 @@ get '/see/:list' do
       tem = shop.stockcards.first(:name => card.name, :quantity.gte => card.quantity)
       if tem then
         cardtotal = card.quantity * tem.price
-        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s}<br>"
+        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition}<br>"
         soma += cardtotal
       end
     end
