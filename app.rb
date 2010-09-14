@@ -77,7 +77,7 @@ get '/see/:list' do
 
   r = ''
   list = List.first_or_create(:name => params[:list])
-  list.shop.each do |shop|
+  list.shops.each do |shop|
     soma = 0
     r += "<b>" + shop.name + "</b><br><br>"
     list.tobuycard.each do |card|
