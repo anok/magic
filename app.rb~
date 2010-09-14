@@ -93,7 +93,15 @@ get '/see/:list' do
 
   r = ''
   list = List.first_or_create(:name => params[:list])
+  tobuy = list.tobuycards
+  r = '<b>Cards Buscados na lista:</b><br>'
+  somacards = 0
+  tobuy.each do |card|
+    somacards += card.quantity
+    r += card.name.to_s + '<br>'
+  end
   list.shops.each do |shop|
+    cartas = 0
     soma = 0
     r += "<b>" + shop.name + "</b><br>"
     list.tobuycards.each do |card|
@@ -102,9 +110,10 @@ get '/see/:list' do
         cardtotal = card.quantity * tem.price
         r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition})<br>"
         soma += cardtotal
+        cartas += card.quantity
       end
     end
-    r += "total: #{soma.to_s}<br><br>"
+    r += "total: #{soma.to_s}(#{cartas.to_s} cards)<br><br>"
   end
   r
 

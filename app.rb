@@ -100,6 +100,7 @@ get '/see/:list' do
     somacards += card.quantity
     r += card.name.to_s + '<br>'
   end
+  r += 'total: #{somacards.to_s} cartas<br><br>"
   list.shops.each do |shop|
     cartas = 0
     soma = 0
