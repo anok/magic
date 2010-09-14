@@ -153,8 +153,8 @@ post '/batchadd/:list' do
   list = List.first_or_create(:name => params[:list])
   cards = params[:cards].split('\n')
   r = ''
-  cards.each do |card|
-    card.split(', ').each do |quant, id|
+  cards.each do |bla|
+    bla.split(', ').each do |quant, id|
       doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id.to_s, hdrs))
       nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
       table = doc.search("table[@class=price_list]").search("tr")
