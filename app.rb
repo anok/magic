@@ -173,7 +173,6 @@ post '/batchadd/:list' do
       tobuycard.save
       list.save
       r +="Card #{nome} adicionado a lista #{list.name}, #{quant} unidades.<br>"
-      end
     end
   end
   r +="para ver a lista: <a href='/see/#{list.name}'>clique aqui</a>."
