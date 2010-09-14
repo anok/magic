@@ -154,7 +154,7 @@ post '/batchadd/:list' do
   cards = params[:cards].split("\n")
   r = ''
   cards.each do |bla|
-    bla.split(",").each do |f|
+    bla.split(", ").each do |f|
       id = f[1].to_i
       quant = f[0].to_i
       doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id.to_s, hdrs))
