@@ -100,7 +100,7 @@ get '/see/:list' do
     somacards += card.quantity
     r += card.name.to_s + ' * ' + card.quantity + '<br>'
   end
-  r += 'total: #{somacards.to_s} cartas<br><br>'
+  r += "total: #{somacards.to_s} cartas<br><br>"
   list.shops.each do |shop|
     cartas = 0
     soma = 0
@@ -114,7 +114,7 @@ get '/see/:list' do
         cartas += card.quantity
       end
     end
-    r += "total: #{soma.to_s}(#{cartas.to_s} cards)<br><br>"
+    r += "total: #{soma.to_s} (#{cartas.to_s} cards)<br><br>"
   end
   r
 
