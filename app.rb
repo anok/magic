@@ -151,7 +151,7 @@ end
 
 post '/batchadd/:list' do
   list = List.first_or_create(:name => params[:list])
-  cards = params[:cards].split()
+  cards = params[:cards].split("\n")
   r = ''
   cards.each do |bla|
     r += "#{bla} <br>"
