@@ -80,7 +80,7 @@ get '/see/:list' do
   list.shops.each do |shop|
     soma = 0
     r += "<b>" + shop.name + "</b><br><br>"
-    list.tobuycard.each do |card|
+    list.tobuycards.each do |card|
       tem = shop.first(:stockcard => [{name => card.name, quantity => card.quantity}])
       if tem then
         cardtotal = card.quantity * tem.price
