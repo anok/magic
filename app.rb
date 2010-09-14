@@ -29,8 +29,8 @@ class List
   include DataMapper::Resource
   property :id, Serial
   property :name, String, :key => true
-  has n, :ToBuyCards
-  has n, :Shops
+  has n, :tobuycards
+  has n, :shops
 end
 
 class ToBuyCard
