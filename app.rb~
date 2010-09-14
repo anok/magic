@@ -47,7 +47,7 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 get '/' do
-  r = 'BEM VINDO AO MARAVILHOSO MUNDO DE MAGIC! AQUI VOCE TERÁ AMIGOS!'
+  r = '<head><title>MAGIC</title><meta content=\'text/html; charset=utf-8\' http-equiv=\'Content-Type\' /></head><body>BEM VINDO AO MARAVILHOSO MUNDO DE MAGIC! AQUI VOCE TERÁ AMIGOS!'
   r += 'para criar uma lista basta apontar seu navegador para -> http://magic.heroku.com/add/<b>NOME</b>/<b>N</b>/<b>ID</b><br>'
   r += 'onde NOME é o nome da lista(como ela vai aparecer aqui na primeira página, e o que você terá que digitar pra buscar ela<br>'
   r += 'N é o numero de cards que você quer<br>'
@@ -60,8 +60,9 @@ get '/' do
   r += 'Also, não tem nenhuma proteção em nenhum lugar para as listas que você cria aqui, afinal, o que você estava esperando do LOST?'
   lists = List.all
   lists.each do |list|
-    r += "<br><a href=\"/see/#{list.name}\">#{list.name}</br>"
+    r += "<br><a href=\"/see/#{list.name}\">#{list.name}"
   end
+  r
 end
 
 hdrs = {"User-Agent"=>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O;en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1", "Accept-Charset"=>"utf-8", "Accept"=>"text/html"}
