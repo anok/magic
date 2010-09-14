@@ -155,7 +155,8 @@ post '/batchadd/:list' do
   r = ''
   cards.each do |bla|
     bla.split(", ").each do |quant, id|
-      doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id.to_s, hdrs))
+      print id
+      doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id, hdrs))
       nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
       table = doc.search("table[@class=price_list]").search("tr")
       table[1..-1].each do |x| x = x.search('td')
