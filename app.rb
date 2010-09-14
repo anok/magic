@@ -74,6 +74,7 @@ get '/add/:list/:quant/:id' do
 end
 
 get '/see/:list' do
+
   r = ''
   list = List.first_or_create(:name => params[:list])
   list.shop.each do |shop|
@@ -90,4 +91,5 @@ get '/see/:list' do
     r += "total: #{soma.to_s}"
   end
   r
+
 end
