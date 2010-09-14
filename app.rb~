@@ -57,7 +57,7 @@ get '/' do
   r += 'As outras cartas que eu quero comprar junto com essa, é só ir no mesmo esquema, adicionando na mesma lista.<br>'
   r += 'Para ver a lista é só ir em /see/Nomedalista. Ainda não tem comando de remoção de cartas/listas. Sim, bem provavel que eu nunca faça nada além disso.<br>'
   r += 'Mas, o código fonte dessa jossa é opensource, você pode pegar no github. faça o que quiser com elee ;3~<br>'
-  r += 'Also, não tem nenhuma proteção em nenhum lugar para as listas que você cria aqui,
+  r += 'Also, não tem nenhuma proteção em nenhum lugar para as listas que você cria aqui, afinal, o que você estava esperando do LOST?'
   lists = List.all
   lists.each do |list|
     r += "<br><a href=\"/see/#{list.name}\">#{list.name}</br>"

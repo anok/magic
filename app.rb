@@ -62,6 +62,7 @@ get '/' do
   lists.each do |list|
     r += "<br><a href=\"/see/#{list.name}\">#{list.name}</br>"
   end
+  r
 end
 
 hdrs = {"User-Agent"=>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O;en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1", "Accept-Charset"=>"utf-8", "Accept"=>"text/html"}
