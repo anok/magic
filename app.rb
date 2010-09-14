@@ -84,7 +84,7 @@ get '/see/:list' do
       tem = shop.first(:stockcard => [{name => card.name, quantity => card.quantity}])
       if tem then
         cardtotal = card.quantity * tem.price
-        r += '#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s}<br>"
+        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s}<br>"
         soma += cardtotal
       end
     end
