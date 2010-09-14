@@ -58,6 +58,7 @@ get '/' do
   r += 'Para ver a lista é só ir em /see/Nomedalista. Ainda não tem comando de remoção de cartas/listas. Sim, bem provavel que eu nunca faça nada além disso.<br>'
   r += 'Mas, o código fonte dessa jossa é opensource, você pode pegar no github. faça o que quiser com elee ;3~<br>'
   r += 'Also, não tem nenhuma proteção em nenhum lugar para as listas que você cria aqui, afinal, o que você estava esperando do LOST?<br>'
+  r += 'No mais, respeitem para serem respeitados e aquela coisa chata de sempre'
   lists = List.all
   lists.each do |list|
     r += "<a href=\"/see/#{list.name}\">#{list.name}<br/>"
@@ -94,7 +95,7 @@ get '/see/:list' do
   r = ''
   list = List.first_or_create(:name => params[:list])
   tobuy = list.tobuycards
-  r = "<b>Cards Buscados na lista <a href='/remove/#{params[:list]}'>[x]</a>:</b><br>"
+  r = "<b>Cards Buscados na lista <a href='/remove/#{params[:list]}/'>[x]</a>:</b><br>"
   somacards = 0
   tobuy.each do |card|
     somacards += card.quantity
