@@ -91,6 +91,3 @@ get '/see/:list' do
   end
   r
 end
-
-get '/all' do
-end
