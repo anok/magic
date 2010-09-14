@@ -98,7 +98,7 @@ get '/see/:list' do
   somacards = 0
   tobuy.each do |card|
     somacards += card.quantity
-    r += card.name.to_s + ' * ' + card.quantity.to_s + '<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>'
+    r += card.name.to_s + ' * ' + card.quantity.to_s + "<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>"
   end
   r += "total: #{somacards.to_s} cartas<br><br>"
   list.shops.each do |shop|
