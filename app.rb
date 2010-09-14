@@ -94,7 +94,7 @@ get '/see/:list' do
   r = ''
   list = List.first_or_create(:name => params[:list])
   tobuy = list.tobuycards
-  r = '<b>Cards Buscados na lista <a href=\'/remove/#{params[:list]}\'>[x]</a>:</b><br>'
+  r = "<b>Cards Buscados na lista <a href='/remove/#{params[:list]}'>[x]</a>:</b><br>"
   somacards = 0
   tobuy.each do |card|
     somacards += card.quantity
