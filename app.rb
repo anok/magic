@@ -62,7 +62,7 @@ get '/add/:list/:quant/:id' do
     shop = list.shops.first_or_create(:name => x[1].inner_html)
     card = shop.stockcards.first_or_create(:name => nome)
     card.quantity = x[3].inner_html.to_i #quantidade
-    card.price = x[4][1..-1].inner_html.to_f #preço
+    card.price = x[4].inner_html[1..-1].to_f #preço
     card.save
     shop.save
   end
