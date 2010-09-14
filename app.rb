@@ -43,7 +43,7 @@ end
 
 DataMapper.finalize
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 
 get '/' do
   "MAGIC!"
@@ -81,7 +81,7 @@ get '/see/:list' do
     soma = 0
     r += "<b>" + shop.name + "</b><br><br>"
     list.tobuycards.each do |card|
-      tem = shop.first(:stockcard => [{name => card.name, quantity => card.quantity}])
+      tem = shop.first(:stockcard => [{:name => card.name, :quantity => card.quantity}])
       if tem then
         cardtotal = card.quantity * tem.price
         r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s}<br>"
