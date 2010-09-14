@@ -49,17 +49,16 @@ get '/' do
   "MAGIC!"
 end
 
+hdrs = {"User-Agent"=>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O;en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1", "Accept-Charset"=>"utf-8", "Accept"=>"text/html"}
+
 get '/add/:list/:quant/:id' do
   list = List.first_or_create(:name => params[:list])
   id = params[:id]
   quant = params[:quant]
-  hdrs = {"User-Agent"=>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O;en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1", "Accept-Charset"=>"utf-8", 
-"Accept"=>"text/html"}
-  doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=10257", hdrs))
-  nome = doc.search("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
+  doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id.to_s, hdrs))
+  nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
   table = doc.search("table[@class=price_list]").search("tr")
-  table.each do |x|
-    x = x.search('td')
+  table[1..-1].each do |x| x = x.search('td')
     shop = list.shops.first_or_create(:name => x[1].inner_html)
     card = shop.stockcards.first_or_create(:name => nome)
     card.quantity = x[3].inner_html.to_i #quantidade
@@ -75,9 +74,7 @@ get '/add/:list/:quant/:id' do
 end
 
 get '/see/:list' do
-
 end
 
 get '/all' do
-
 end
