@@ -47,8 +47,8 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 get '/' do
-  r = '<head><title>MAGIC</title><meta content=\'text/html; charset=utf-8\' http-equiv=\'Content-Type\' /></head><body>BEM VINDO AO MARAVILHOSO MUNDO DE MAGIC! AQUI VOCE TERÁ AMIGOS!'
-  r += 'para criar uma lista basta apontar seu navegador para -> http://magic.heroku.com/add/<b>NOME</b>/<b>N</b>/<b>ID</b><br>'
+  r = '<head><title>MAGIC</title><meta content=\'text/html; charset=utf-8\' http-equiv=\'Content-Type\' /></head><body>BEM VINDO AO MARAVILHOSO MUNDO DE MAGIC! AQUI VOCE TERÁ AMIGOS!<br>'
+  r += '<br>Para criar uma lista basta apontar seu navegador para -> http://magic.heroku.com/add/<b>NOME</b>/<b>N</b>/<b>ID</b><br>'
   r += 'onde NOME é o nome da lista(como ela vai aparecer aqui na primeira página, e o que você terá que digitar pra buscar ela<br>'
   r += 'N é o numero de cards que você quer<br>'
   r += 'ID é o id dela no site <a href=\'http://store.tcgplayer.com/\' target=\'_blank\'>http://store.tcgplayer.com</a><br>'
