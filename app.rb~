@@ -94,7 +94,7 @@ get '/see/:list' do
   r = ''
   list = List.first_or_create(:name => params[:list])
   tobuy = list.tobuycards
-  r = '<b>Cards Buscados na lista<a href=\'/remove/#{params[:list]}\'>[x]</a>(deletar lista):</b><br>'
+  r = '<b>Cards Buscados na lista <a href=\'/remove/#{params[:list]}\'>[x]</a>:</b><br>'
   somacards = 0
   tobuy.each do |card|
     somacards += card.quantity
@@ -122,7 +122,7 @@ end
 
 get '/removecard/:list/:id' do
   list = List.first_or_create(:name => params[:list])
-  tobuy = list.tobuycards.first(:id => params[:list])
+  tobuy = list.tobuycards.first(:id => params[:id])
   tobuy.delete!
   redirect '/see/#{params[:list]'
 end
