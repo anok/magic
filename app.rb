@@ -16,7 +16,7 @@ class Shop
   has n, :StockCards
 end
 
-class StockCard
+class Stockcard
   include DataMapper::Resource
   belongs_to :shop
   property :id, Serial
@@ -33,7 +33,7 @@ class List
   has n, :shops
 end
 
-class ToBuyCard
+class Tobuycard
   include DataMapper::Resource
   belongs_to :list
   property :id, Serial
