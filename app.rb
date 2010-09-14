@@ -123,7 +123,7 @@ end
 get '/removecard/:list/:id' do
   list = List.first_or_create(:name => params[:list])
   tobuy = list.tobuycards.first(:id => params[:id])
-  tobuy.delete!
+  tobuy.destroy!
   redirect "/see/#{params[:list]}"
 end
 
@@ -137,6 +137,6 @@ end
 
 get '/remove/:list/' do
   list = List.first_or_create(:name => params[:list])
-  list.delete!
+  list.destroy!
   redirect '/'
 end
