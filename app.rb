@@ -74,6 +74,21 @@ get '/add/:list/:quant/:id' do
 end
 
 get '/see/:list' do
+  r = ''
+  list = List.first_or_create(:name => params[:list])
+  list.shop.each do |shop|
+    soma = 0
+    r += '<b>'+ shop.name'</b><br><br>'
+    list.tobuycard.each do |card|
+      tem = shop.first(:stockcard => [{name => card.name, quantity => card.quantity}])
+      if tem then
+        cardtotal = card.quantity * tem.price
+        r += '#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s}<br>"
+        soma += cardtotal
+      end
+    end
+    r += "total: #{soma.to_s}"
+  end
 end
 
 get '/all' do
