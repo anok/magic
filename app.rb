@@ -109,10 +109,10 @@ get '/see/:list' do
     list.tobuycards.each do |card|
       tem = shop.stockcards.first(:name => card.name, :quantity.gte => card.quantity)
       if tem then
-        cardtotal = card.quantity * tem.price
-        r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition}) <a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>"
-        soma += cardtotal
-        cartas += card.quantity
+      cardtotal = card.quantity * tem.price
+      r += "#{card.name.to_s} $#{tem.price.to_s} * #{card.quantity.to_s} = #{cardtotal.to_s} (#{tem.condition}) <a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity+1}\'>+</a>/<a href=\'/updatecard/#{params[:list]}/#{card.id}/#{card.quantity-1}\'>-</a> | <a href=\'/removecard/#{params[:list]}/#{card.id}\'>[x]</a><br>"
+      soma += cardtotal
+      cartas += card.quantity
       end
     end
     r += "total: #{soma.to_s} (#{cartas.to_s} cards)<br><br>"
@@ -155,25 +155,24 @@ post '/batchadd/:list' do
   r = ''
   cards.each do |bla|
     bla.split(", ").each do |x|
-      x.each do |quant, id|
-        id = id.strip.to_i
-        quant = quant.to_i
-        doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id, hdrs))
-        nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
-        table = doc.search("table[@class=price_list]").search("tr")
-        table[1..-1].each do |x| x = x.search('td')
-          shop = list.shops.first_or_create(:name => x[1].inner_html)
-          card = shop.stockcards.first_or_create(:name => nome, :condition => x[2].inner_html)
-          card.quantity = x[3].inner_html.to_i #quantidade
-          card.price = x[4].inner_html[1..-1].to_f #preço
-          card.save
-          shop.save
-        end
-        tobuycard = list.tobuycards.first_or_create(:name => nome)
-        tobuycard.quantity = quant
-        tobuycard.save
-        list.save
-        r +="Card #{nome} adicionado a lista #{list.name}, #{quant} unidades.<br>"
+      id = x[1].strip.to_i
+      quant = x[0].to_i
+      doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id, hdrs))
+      nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
+      table = doc.search("table[@class=price_list]").search("tr")
+      table[1..-1].each do |x| x = x.search('td')
+        shop = list.shops.first_or_create(:name => x[1].inner_html)
+        card = shop.stockcards.first_or_create(:name => nome, :condition => x[2].inner_html)
+        card.quantity = x[3].inner_html.to_i #quantidade
+        card.price = x[4].inner_html[1..-1].to_f #preço
+        card.save
+        shop.save
+      end
+      tobuycard = list.tobuycards.first_or_create(:name => nome)
+      tobuycard.quantity = quant
+      tobuycard.save
+      list.save
+      r +="Card #{nome} adicionado a lista #{list.name}, #{quant} unidades.<br>"
       end
     end
   end
