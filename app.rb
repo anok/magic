@@ -78,7 +78,7 @@ get '/see/:list' do
   list = List.first_or_create(:name => params[:list])
   list.shop.each do |shop|
     soma = 0
-    r += '<b>'+ shop.name'</b><br><br>'
+    r += '<b>'+ shop.name +'</b><br><br>'
     list.tobuycard.each do |card|
       tem = shop.first(:stockcard => [{name => card.name, quantity => card.quantity}])
       if tem then
