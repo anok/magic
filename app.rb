@@ -155,24 +155,7 @@ post '/batchadd/:list' do
   r = ''
   cards.each do |bla|
     bla.split(', ').each do |quant, id|
-      doc = Hpricot(open("http://store.tcgplayer.com/product.aspx?id=" + id.to_s, hdrs))
-      nome = doc.at("span[@id=ctl00_cphMain_lblName").inner_html #nome do card
-      table = doc.search("table[@class=price_list]").search("tr")
-      table[1..-1].each do |x|
-        x = x.search('td')
-        shop = list.shops.first_or_create(:name => x[1].inner_html)
-        card = shop.stockcards.first_or_create(:name => nome, :condition => x[2].inner_html)
-        card.quantity = x[3].inner_html.to_i #quantidade
-        card.price = x[4].inner_html[1..-1].to_f #preço
-        card.save
-        shop.save
-      end
-      tobuycard = list.tobuycards.first_or_create(:name => nome)
-      tobuycard.quantity = quant
-      tobuycard.save
-      list.save
-      r +="Card #{nome} adicionado a lista #{list.name}, #{quant} unidades.<br>"
-    end
+      r += '"'+ quant + '" "' + id + '"<br>'
   end
   r +="para ver a lista: <a href='/see/#{list.name}'>clique aqui</a>."
   r
